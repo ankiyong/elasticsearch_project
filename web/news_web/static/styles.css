@@ -1,0 +1,106 @@
+* {
+	margin: 0px auto;
+	padding: 0px;	
+}
+
+#header, .section1, .section2, #footer,
+.slide_banner, .side_banner, 
+.hit_product, .md_product,
+.office_logo,.office_address, .office_address{
+	border: 1px solid #cccccc;
+}
+
+#header, .lnb, .logo .logoimg, .hitmenu li {
+	border: 1px dashed #cccccc;
+}
+
+#content {
+	width: 1200px;	
+	margin: 20px 20px 20px 20px;
+}
+
+em {
+	font-weight: bold;
+	color: red;
+}
+
+/* 배치 및 사이징 */
+
+.gnb, .hitmenu, .lnb {
+	height: 30px;
+	line-height: 30px;
+}
+
+	.gnb li {
+		width: 100px;
+	}
+		
+	.logo .logoimg {
+		width: 200px;
+		height: 100px;
+		line-height: 100px;
+	}
+
+	.hitmenu{
+		position:absolute;
+		right:50px;		
+		top:160px;
+	}
+
+	.hitmenu li {
+		width: 80px;
+	}
+
+		.hitmenu li a {
+			width: 80px;
+		}
+
+
+	.lnb li {
+		width: 80px;
+	}
+
+    .lnb li:active{
+        background-color: black;
+        color: whitesmoke;
+    }
+	
+
+
+
+/* 배치 */
+.lnb > ul > li {
+	display:inline-block;
+}
+
+.hitmenu,
+.section1, .section2,
+#footer {
+	overflow: hidden;
+}
+
+	.hitmenu > ul > li,
+	.slide_banner,
+	.side_banner,
+	.hit_product,
+	.md_product,
+	.office_logo,
+	.office_address,
+	.shopping_info {
+		float: left;
+		list-style: none;
+	}
+
+
+/* 여백 */
+
+/* 색깔 및 폰트*/
+a {
+	text-decoration:none;
+}
+
+.lnb {
+	font-weight: bold;
+	text-align: left;
+    margin-left: 30;
+}

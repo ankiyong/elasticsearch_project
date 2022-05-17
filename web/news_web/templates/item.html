@@ -1,0 +1,140 @@
+<html>
+<head>
+    <title>검색 엔진 POC</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $(function(){
+
+            let searchForm = $(".frm");
+
+            $(".lnb").on("click", "li",function (){
+
+               
+                let media = $(this).data("value");
+                console.log("media : " + media);
+
+                //alert(media);
+
+                $(".media").val(media);
+
+                if (chk() == false) {
+
+                    return false;
+                }                
+
+                searchForm.submit();
+            });
+
+            $(".search-btn").on("click",function(){
+
+                let searchText = $(".search-text").val().trim();
+
+                if (chk() == false) {
+
+                    return false;
+                }         
+
+                /*
+                if (chk() == false) {
+                    frm.search_text.focus();
+                    alert("검색어는 2글자 이상 입력하세요");
+                    return false;
+                } 
+                */               
+                searchForm.submit();
+            });
+
+            function chk() {    
+                let searchText = $(".search-text").val().trim();
+
+                if (searchText.length < 2) {
+                        frm.search_text.focus();
+                        alert("검색어는 2글자 이상 입력하세요");
+                        return false;
+                } 
+
+                return true;
+            }
+        
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <h1>오프너드 통합 검색 POC</h1>                
+    </div>
+    <div id="header">
+        <!-- onsubmit="return chk()" -->
+        <form class="frm" name="frm">
+            <div>
+                 <select width=100 name="">
+                        <option>전체</option>
+                        <option>KBS</option>
+                        <option>SBS</option>
+                        <option>JTBC</option>
+                </select>
+                <input class="search-text" type="text" size=50 value="{{ search_text }}" type="text" name="search_text" placeholder="2글자 이상 입력" size="25"/>    
+                <button class="search-btn" type="button">검색</button>
+                <!--<button type="submit">상세 검색</button>-->
+                <input type="hidden" class="media" name="media" value="{{ media }}"/>              
+            </div>
+            <br>
+            <div class="lnb">
+                <ul>
+                    <li class="medias"   data-value=""><b>전체({{ total_value }})</b></li>
+                    <li data-value="kbs"><b>KBS</b></li>
+                    <li data-value="sbs"><b>SBS</b></li>
+                    <li data-value="jtbc"><b>JTBC</b></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div id="content">
+        {% for hit in hits %}
+            {{ loop.index }} 번째<br>
+            <p>방송사 :
+            {% if 'media' in hit['_source'] %}
+                {{ hit['_source']['media'] }}</p>
+            {% endif %}
+            <p>기사제목 : 
+                {% if 'title' in hit['highlight'] %}
+                {{ hit['highlight']['title'][0]|safe  }} </p>
+                {% else %}
+                {{ hit['_source']['title']  }} </p>
+                {% endif %}
+            <p>작성 시간 : {{hit['_source']['date']}} </p>
+            <p>기자명 : {{hit['_source']['writer']}} </p>
+            <p>email : {{hit['_source']['email']}} </p>
+            <br>
+            <p>기사본문</p>
+            {% for high in hit['highlight']['text'] %}
+                {{high|safe}}<br>
+            {% endfor %}
+            
+            <br>
+        {% endfor %}
+        {#
+        {{media}} <br>
+        {{writer}} <br>
+        {{email}} <br>        
+        #}
+
+
+        
+        
+    </div>      <!-- content end -->
+<div class="pagination-wrapper clearfix">
+    <ul class="pagination float--right" id="pages">
+    </ul>
+</div>
+    <div>
+        
+    </div>
+    
+</body>
+</html>

@@ -2,6 +2,8 @@
 
 1. mysql 홈페이지에서 커뮤니티 버전 설치 페이지로 들어간 후 노떙큐 어쩌구 다운로드의 주소를 복사한다
 
+   https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.29-1.el7.x86_64.rpm-bundle.tar
+
 2. terminal에서 sudo yum install -y 복사한주소    를 입력한다
 
 3. 레포지토리 설치가 완료 되었다.
@@ -21,7 +23,7 @@
    입력해서 비번을 바꿔준다
 
 9. ```sql
-   mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'P@ssW0rd';
+   mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'MySQL2020!';
    mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
    mysql> commit;
    mysql> flush privileges;
